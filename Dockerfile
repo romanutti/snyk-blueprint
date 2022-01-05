@@ -5,7 +5,7 @@ COPY pom.xml /home/maven
 COPY src /home/maven/src
 RUN mvn -B -f pom.xml clean package -DskipTests
 
-FROM openjdk:8u181-jdk-alpine
+FROM openjdk:17-ea-22-jdk-oracle
 RUN mkdir /app
 COPY --from=build /home/maven/target/*.jar snyk-demo-app.jar
 EXPOSE 8080
