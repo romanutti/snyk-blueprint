@@ -11,17 +11,30 @@ It depends on a [pre-initialized project](https://start.spring.io/) using
 
 ### Running the application
 
-Run it:
+Run the docker image:
 
 ```bash
 docker run --name snyk-demo-app --rm -p 8080:8080 romanutti/snyk-demo-app
 ```
 
-Or alternatively, build it yourself:
+Or if you want to build it yourself:
 
 ```bash
 docker build . -t snyk-demo-app
 docker run -p 8080:8080 --name snyk-demo-app --rm snyk-demo-app
+```
+
+Alternatively, the app can also be run using the [Kubernetes cluster shipped with Docker Desktop](https://docs.docker.com/desktop/kubernetes/):
+
+```bash
+# Create a namespace
+kubectl create ns snyk-docker
+
+# Set the current context to use the new namespace
+kubectl config set-context --current --namespace snyk-docker
+
+# Spin up the goof deployment and service
+kubectl create -f app-deployment.yml
 ```
 
 ### Fixing the application
